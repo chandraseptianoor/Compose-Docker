@@ -1,0 +1,26 @@
+version: '3.2'
+services: 
+    apigw:
+        image: "store/softwareag/apigateway-trial:10.7"
+        hostname: "apigw-host"
+        environment: 
+            - apigw_elasticsearch_hosts=elastic-host:9200
+        ports:
+            - 5000:5555
+            - 9072:9072
+    elastic:
+        image: "elasticsearch:7.12.1"
+        hostname: "elastic-host"
+        environment: 
+            - discovery.type=single-node
+        volumes: 
+            - data:/usr/share/elasticsearch/data
+        ports:
+            - 9200:9200
+            - 9300:9300
+networks: 
+    default:
+        external: 
+            name: is-kafka
+volumes: 
+    data:
