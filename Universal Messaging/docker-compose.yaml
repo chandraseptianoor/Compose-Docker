@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+    um-server:
+        image: "store/softwareag/universalmessaging-server:10.7"
+        ports:
+            - 9000:9000
+networks: 
+    default:
+        external: 
+            name: is-kafka
