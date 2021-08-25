@@ -1,0 +1,10 @@
+version: '3.2'
+services:
+    cc-server:
+        image: "store/softwareag/commandcentral-server:10.7"
+        ports:
+            - 8091:8091
+networks: 
+    default:
+        external: 
+            name: is-kafka
