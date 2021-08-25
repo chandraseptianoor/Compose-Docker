@@ -1,0 +1,42 @@
+version: '3.2'
+services:
+    centrasite-crr:
+        image: store/softwareag/centrasite-crr:10.7
+        container_name: crrcontainer
+        hostname: crrcontainer
+        ports:
+            - "53313:53313"
+        environment:
+            - ACCEPT_EULA=Y
+        volumes:
+            - CentraSiteDB:/data
+            - CentraSiteLogs:/logs
+            - CentraSiteConfig:/configs
+            - CentraSiteLicense:/licenses
+    centrasite-cast:
+        image: store/softwareag/centrasite-cast:10.7
+        container_name: castcontainer
+        hostname: castcontainer
+        ports:
+            - "53307:53307"
+            - "53308:53308"
+            - "8181:8181"
+        environment:
+            - ACCEPT_EULA=Y
+            - CRRHOST=crrcontainer
+        volumes:
+            - CTPConfiguration:/configs
+            - CTPLogs:/logs
+        depends_on: 
+            - centrasite-crr
+volumes:
+    CentraSiteDB:
+    CentraSiteLogs:
+    CentraSiteConfig:
+    CentraSiteLicense:
+    CTPConfiguration:
+    CTPLogs:
+networks:
+    default:
+        external: 
+            name: is-kafka
