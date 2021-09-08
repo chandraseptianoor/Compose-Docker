@@ -40,7 +40,7 @@ ports:
 - '80:80'
 networks:
 - frontend
-- is-kafka
+- on-premise
 
 networks:
 frontend:
