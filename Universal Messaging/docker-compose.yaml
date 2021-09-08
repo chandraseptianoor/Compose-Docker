@@ -7,4 +7,4 @@ services:
 networks: 
     default:
         external: 
-            name: is-kafka
+            name: on-premise
